@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://birydr8jf1hmp"]
+
+[ext_resource type="Script" uid="uid://bhtfjb44q2i2q" path="res://scripts/Board.cs" id="1_bw3vb"]
+[ext_resource type="Texture2D" uid="uid://bmmghipbwjrb0" path="res://assets/The Chess Board A.png" id="2_tx6nw"]
+
+[node name="board" type="Node2D" unique_id=1903354429]
+script = ExtResource("1_bw3vb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=909838179]
+texture = ExtResource("2_tx6nw")
