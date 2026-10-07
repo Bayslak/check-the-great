@@ -4,4 +4,5 @@
 
 [node name="main" type="Node2D" unique_id=520177350]
 
-[node name="board" parent="." unique_id=1903354429 instance=ExtResource("1_o5qli")]
+[node name="board" parent="." unique_id=1903354429 node_paths=PackedStringArray("_tiles") instance=ExtResource("1_o5qli")]
+_tiles = {}

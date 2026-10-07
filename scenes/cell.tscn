@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bif2m5msafore"]
+
+[ext_resource type="Script" uid="uid://pob0vwecjknl" path="res://scripts/Cell.cs" id="1_upbjj"]
+[ext_resource type="Texture2D" uid="uid://dmc0nvarkpgki" path="res://assets/light_cell.png" id="2_nm02e"]
+[ext_resource type="Texture2D" uid="uid://dbvac8xm6g8oc" path="res://assets/dark_cell.png" id="3_ds1sf"]
+
+[node name="cell" type="Node2D" unique_id=958663218]
+script = ExtResource("1_upbjj")
+_lightTexture = ExtResource("2_nm02e")
+_darkTexture = ExtResource("3_ds1sf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1068186686]
