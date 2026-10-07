@@ -6,7 +6,7 @@ using Godot.Collections;
 public partial class Board : Node2D
 {
     [Export] private PackedScene _cellPrefab;
-    [Export] private Dictionary<Cell, CellPosition> _tiles;
+    [Export] private Dictionary<CellPosition, Cell> _tiles;
 
     public override void _Ready()
     {
@@ -15,7 +15,7 @@ public partial class Board : Node2D
 
     private void InitializeBoard(int rows, int cols)
     {
-        _tiles = new Dictionary<Cell, CellPosition>();
+        _tiles = new Dictionary<CellPosition, Cell>();
 
         bool lightCell = true;
         var cellTextureSize = Vector2.Zero;
@@ -31,7 +31,7 @@ public partial class Board : Node2D
                 if (cellTextureSize == Vector2.Zero)
                     cellTextureSize = cellToAdd.GetTextureSize();
                 
-                _tiles.Add(cellToAdd, new CellPosition(i, j));
+                _tiles.Add(new CellPosition(i, j), cellToAdd);
                 AddChild(cellToAdd);
 
                 lightCell = !lightCell;
