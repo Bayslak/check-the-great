@@ -2,4 +2,4 @@
 
 namespace ChecktheGreat.scripts;
 
-public partial class CellPosition(int Col, int Row) : Node;
+public readonly record struct CellPosition(int Col, int Row);

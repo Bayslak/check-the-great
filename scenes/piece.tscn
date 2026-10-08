@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://5obof4nggwsk"]
+
+[ext_resource type="Script" uid="uid://c7v63txnurupt" path="res://scripts/Piece.cs" id="1_gebih"]
+[ext_resource type="Texture2D" uid="uid://cvi8aa6x77e65" path="res://assets/dark_pawn.png" id="2_s58gp"]
+
+[node name="piece" type="Node2D" unique_id=730180697]
+script = ExtResource("1_gebih")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1913818453]
+texture = ExtResource("2_s58gp")

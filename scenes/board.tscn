@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bhtfjb44q2i2q" path="res://scripts/Board.cs" id="1_bw3vb"]
 [ext_resource type="PackedScene" uid="uid://bif2m5msafore" path="res://scenes/cell.tscn" id="2_tx6nw"]
 
-[node name="board" type="Node2D" unique_id=1903354429 node_paths=PackedStringArray("_tiles")]
+[node name="board" type="Node2D" unique_id=1903354429]
 script = ExtResource("1_bw3vb")
 _cellPrefab = ExtResource("2_tx6nw")
-_tiles = {}

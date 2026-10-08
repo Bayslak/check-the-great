@@ -1,19 +1,13 @@
-using System.Diagnostics;
-using ChecktheGreat.scripts;
+using System.Collections.Generic;
 using Godot;
-using Godot.Collections;
+namespace ChecktheGreat.scripts;
 
 public partial class Board : Node2D
 {
     [Export] private PackedScene _cellPrefab;
-    [Export] private Dictionary<CellPosition, Cell> _tiles;
+    private Dictionary<CellPosition, Cell> _tiles = [];
 
-    public override void _Ready()
-    {
-        InitializeBoard(8, 8);
-    }
-
-    private void InitializeBoard(int rows, int cols)
+    public bool InitializeBoard(int cols, int rows)
     {
         _tiles = new Dictionary<CellPosition, Cell>();
 
@@ -36,12 +30,17 @@ public partial class Board : Node2D
 
                 lightCell = !lightCell;
                 
-                cellToAdd.Position = new Vector2(this.Position.X + (cellTextureSize.X) * i, this.Position.Y + (cellTextureSize.Y) * j);
+                cellToAdd.Position = new Vector2(this.Position.X + (cellTextureSize.X) * i, this.Position.Y - (cellTextureSize.Y) * j);
             }
             
             lightCell = !lightCell;
         }
+
+        return true;
     }
-    
-    
+
+    public Cell GetCellByCellPosition(CellPosition position)
+    {
+        return _tiles[position];
+    }
 }

@@ -9,7 +9,7 @@ public partial class Cell : Node2D
 
     public override void _Ready()
     {
-        _sprite =  GetNode<Sprite2D>("Sprite2D");
+        _sprite = GetNode<Sprite2D>("Sprite2D");
     }
 
     public Vector2 GetTextureSize()
