@@ -11,6 +11,7 @@ public class Level
     [JsonPropertyName("board_rows")] public int Rows { get; set; }
     [JsonPropertyName("board_columns")] public int Columns { get; set; }
     [JsonPropertyName("empty_tiles")] public string[] EmptyTilesJson { get; set; } = [];
+    [JsonPropertyName("enemies")] public EnemyInitialization[] Enemies { get; set; } = [];
     
     [JsonIgnore]
     public HashSet<CellPosition> EmptyTiles;

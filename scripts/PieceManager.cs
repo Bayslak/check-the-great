@@ -26,15 +26,14 @@ public partial class PieceManager : Node
 
     private void HandleBoardReadyEvent()
     {
-        SpawnPawn();
     }
 
-    private void SpawnPawn()
+    public void SpawnPawn(CellPosition startingPosition)
     {
         var pawnSpawned = _piecePrefab.Instantiate<Piece>();
         AddChild(pawnSpawned);
         
-        var cell = BoardManager.GetCellByPosition(new CellPosition(1, 8));
+        var cell = BoardManager.GetCellByPosition(startingPosition);
         
         pawnSpawned.Position = cell.GlobalPosition;
     }

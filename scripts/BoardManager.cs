@@ -23,7 +23,7 @@ public partial class BoardManager : Node2D
         
         var boardSpawned = _boardPrefab.Instantiate<Board>();
         AddChild(boardSpawned);
-
+        
         string levelJson = File.ReadAllText("resources/level_test.json");
         var level = Level.LoadFromJson(levelJson);
         
@@ -33,6 +33,11 @@ public partial class BoardManager : Node2D
         if (boardInitialized)
         {
             BoardReady?.Invoke();
+        }
+
+        foreach (var enemyInitialization in level.Enemies)
+        {
+            PieceManager.SpawnPawn(enemyInitialization.StartingPosition);
         }
     }
 
