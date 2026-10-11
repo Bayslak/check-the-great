@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Godot;
 
 namespace ChecktheGreat.scripts;
@@ -22,16 +23,12 @@ public partial class BoardManager : Node2D
         
         var boardSpawned = _boardPrefab.Instantiate<Board>();
         AddChild(boardSpawned);
+
+        string levelJson = File.ReadAllText("resources/level_test.json");
+        var level = Level.LoadFromJson(levelJson);
         
         Board = boardSpawned;
-        var emptyCells = new HashSet<CellPosition>()
-        {
-            new CellPosition(2, 2),
-            new CellPosition(2, 3),
-            new CellPosition(4, 7)
-        };
-        
-        bool boardInitialized = Board.InitializeBoard(8, 8, emptyCells);
+        bool boardInitialized = Board.InitializeBoard(level);
 
         if (boardInitialized)
         {

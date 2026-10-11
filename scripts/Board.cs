@@ -5,17 +5,22 @@ namespace ChecktheGreat.scripts;
 public partial class Board : Node2D
 {
     [Export] private PackedScene _cellPrefab;
+    public int Rows, Cols;
     private Dictionary<CellPosition, Cell> _tiles = [];
 
-    public bool InitializeBoard(int cols, int rows, HashSet<CellPosition> emptyTiles)
+    public bool InitializeBoard(Level level)
     {
+        Rows = level.Rows;
+        Cols = level.Columns;
+        
         _tiles = new Dictionary<CellPosition, Cell>();
+        var emptyTiles = level.EmptyTiles;
 
         bool lightCell = true;
         var cellTextureSize = Vector2.Zero;
-        for (int i = 1; i <= cols; i++)
+        for (int i = 1; i <= Cols; i++)
         {
-            for (int j = 1; j <= rows; j++)
+            for (int j = 1; j <= Rows; j++)
             {
                 lightCell = !lightCell;
                 var cellPosition = new CellPosition(i, j);
@@ -32,7 +37,6 @@ public partial class Board : Node2D
                 
                 _tiles.Add(cellPosition, cellToAdd);
                 AddChild(cellToAdd);
-
                 
                 cellToAdd.Position = new Vector2(this.Position.X + (cellTextureSize.X) * i, this.Position.Y - (cellTextureSize.Y) * j);
             }

@@ -1,0 +1,10 @@
+﻿{
+  "name": "The Beginning",
+  "board_rows" : 8,
+  "board_columns" : 8,
+  "empty_tiles" : [
+    "2,2",
+    "2,3",
+    "4,7"
+  ]
+}

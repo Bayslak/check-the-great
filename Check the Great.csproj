@@ -5,4 +5,7 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>ChecktheGreat</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="resources\level_test.json" />
+  </ItemGroup>
 </Project>
