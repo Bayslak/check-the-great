@@ -5,11 +5,72 @@
   "empty_tiles" : [
     "2,2",
     "2,3",
-    "4,7"
+    "4,6"
   ],
   "enemies" : [
     {
-    "starting_position" : "1,8"
+      "piece_type": "Rook",
+      "starting_position" : "1,8"
+    },
+    {
+      "piece_type": "Knight",
+      "starting_position" : "2,8"
+    },
+    {
+      "piece_type": "Bishop",
+      "starting_position" : "3,8"
+    },
+    {
+      "piece_type": "Queen",
+      "starting_position" : "4,8"
+    },
+    {
+      "piece_type": "King",
+      "starting_position" : "5,8"
+    },
+    {
+      "piece_type": "Bishop",
+      "starting_position" : "6,8"
+    },
+    {
+      "piece_type": "Knight",
+      "starting_position" : "7,8"
+    },
+    {
+      "piece_type": "Rook",
+      "starting_position" : "8,8"
+    },
+    {
+      "piece_type": "Pawn",
+      "starting_position" : "1,7"
+    },
+    {
+      "piece_type": "Pawn",
+      "starting_position" : "2,7"
+    },
+    {
+      "piece_type": "Pawn",
+      "starting_position" : "3,7"
+    },
+    {
+      "piece_type": "Pawn",
+      "starting_position" : "4,7"
+    },
+    {
+      "piece_type": "Pawn",
+      "starting_position" : "5,7"
+    },
+    {
+      "piece_type": "Pawn",
+      "starting_position" : "6,7"
+    },
+    {
+      "piece_type": "Pawn",
+      "starting_position" : "7,7"
+    },
+    {
+      "piece_type": "Pawn",
+      "starting_position" : "8,7"
     }
   ]
 }

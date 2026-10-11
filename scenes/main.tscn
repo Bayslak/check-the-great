@@ -4,6 +4,19 @@
 [ext_resource type="Script" uid="uid://djbi8v2kfdmsw" path="res://scripts/BoardManager.cs" id="1_sugp2"]
 [ext_resource type="Script" uid="uid://c3q0horgptqao" path="res://scripts/PieceManager.cs" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://5obof4nggwsk" path="res://scenes/piece.tscn" id="4_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://cvi8aa6x77e65" path="res://assets/dark_pawn.png" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://br7wkoq0rj5tw" path="res://assets/dark_knight.png" id="6_jbj1t"]
+[ext_resource type="Texture2D" uid="uid://b65uskx6i672s" path="res://assets/light_pawn.png" id="6_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://dp8v8qiek7hty" path="res://assets/dark_bishop.png" id="7_muem4"]
+[ext_resource type="Texture2D" uid="uid://c2nqwv5t5ogib" path="res://assets/dark_rook.png" id="8_dp3eg"]
+[ext_resource type="Texture2D" uid="uid://c48j545kx1h7k" path="res://assets/dark_queen.png" id="9_0ld40"]
+[ext_resource type="Texture2D" uid="uid://qk3p7gps7mp7" path="res://assets/dark_king.png" id="10_gqmmt"]
+[ext_resource type="Texture2D" uid="uid://c6dqjcladeac4" path="res://assets/light_knight.png" id="12_yc10j"]
+[ext_resource type="Texture2D" uid="uid://dqmreiirpyykw" path="res://assets/light_bishop.png" id="13_jscy8"]
+[ext_resource type="Texture2D" uid="uid://cmkafc7yl6yfc" path="res://assets/light_rook.png" id="14_pm3ni"]
+[ext_resource type="Texture2D" uid="uid://brll0h1nv8t1f" path="res://assets/light_queen.png" id="15_y6deb"]
+[ext_resource type="Texture2D" uid="uid://26beuj5t4gth" path="res://assets/light_king.png" id="16_og1vs"]
+[ext_resource type="Script" uid="uid://ck4dvymj3q75l" path="res://scripts/Camera.cs" id="17_muem4"]
 
 [node name="main" type="Node2D" unique_id=520177350]
 
@@ -15,4 +28,20 @@ _boardPrefab = ExtResource("1_o5qli")
 [node name="piece_manager" type="Node" parent="." unique_id=1503732883 node_paths=PackedStringArray("BoardManager")]
 script = ExtResource("3_jyhfs")
 _piecePrefab = ExtResource("4_jyhfs")
+_blackPawn = ExtResource("5_tefeu")
+_blackKnight = ExtResource("6_jbj1t")
+_blackBishop = ExtResource("7_muem4")
+_blackRook = ExtResource("8_dp3eg")
+_blackQueen = ExtResource("9_0ld40")
+_blackKing = ExtResource("10_gqmmt")
+_whitePawn = ExtResource("6_o6xl0")
+_whiteKnight = ExtResource("12_yc10j")
+_whiteBishop = ExtResource("13_jscy8")
+_whiteRook = ExtResource("14_pm3ni")
+_whiteQueen = ExtResource("15_y6deb")
+_whiteKing = ExtResource("16_og1vs")
 BoardManager = NodePath("../board_manager")
+
+[node name="camera" type="Camera2D" parent="." unique_id=1919428505]
+zoom = Vector2(1.5, 1.5)
+script = ExtResource("17_muem4")

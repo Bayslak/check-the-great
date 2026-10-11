@@ -16,16 +16,15 @@ public partial class BoardManager : Node2D
     
     public override void _Ready()
     {
-        PieceManager.SetBoardManager(this);
-        
-        var viewportSize = GetViewport().GetVisibleRect().Size;
-        this.Position = new Vector2(viewportSize.X / 2, viewportSize.Y / 2);
-        
-        var boardSpawned = _boardPrefab.Instantiate<Board>();
-        AddChild(boardSpawned);
-        
         string levelJson = File.ReadAllText("resources/level_test.json");
         var level = Level.LoadFromJson(levelJson);
+        
+        PieceManager.SetBoardManager(this);
+        
+        PositionBoardManager(level);
+
+        var boardSpawned = _boardPrefab.Instantiate<Board>();
+        AddChild(boardSpawned);
         
         Board = boardSpawned;
         bool boardInitialized = Board.InitializeBoard(level);
@@ -37,8 +36,17 @@ public partial class BoardManager : Node2D
 
         foreach (var enemyInitialization in level.Enemies)
         {
-            PieceManager.SpawnPawn(enemyInitialization.StartingPosition);
+            PieceManager.SpawnPawn(enemyInitialization.StartingPosition, enemyInitialization.PieceType, PieceHouse.Dark);
         }
+    }
+
+    private void PositionBoardManager(Level level)
+    {
+        int boardWidth = level.Columns * 16;
+        int boardHeight = level.Rows * 16;
+        
+        var viewportSize = GetViewport().GetVisibleRect().Size;
+        this.Position = new Vector2((viewportSize.X / 2) - (int)(boardWidth / 2), (viewportSize.Y / 2) + (int)(boardHeight / 2));
     }
 
     public Cell GetCellByPosition(CellPosition position)
