@@ -7,7 +7,7 @@ public partial class Board : Node2D
     [Export] private PackedScene _cellPrefab;
     private Dictionary<CellPosition, Cell> _tiles = [];
 
-    public bool InitializeBoard(int cols, int rows)
+    public bool InitializeBoard(int cols, int rows, HashSet<CellPosition> emptyTiles)
     {
         _tiles = new Dictionary<CellPosition, Cell>();
 
@@ -17,6 +17,11 @@ public partial class Board : Node2D
         {
             for (int j = 1; j <= rows; j++)
             {
+                lightCell = !lightCell;
+                var cellPosition = new CellPosition(i, j);
+                if (emptyTiles.Contains(cellPosition))
+                    continue;
+                
                 var cellToAdd = _cellPrefab.Instantiate<Cell>();
 
                 cellToAdd.InitializeCell(lightCell);
@@ -25,10 +30,9 @@ public partial class Board : Node2D
                 if (cellTextureSize == Vector2.Zero)
                     cellTextureSize = cellToAdd.GetTextureSize();
                 
-                _tiles.Add(new CellPosition(i, j), cellToAdd);
+                _tiles.Add(cellPosition, cellToAdd);
                 AddChild(cellToAdd);
 
-                lightCell = !lightCell;
                 
                 cellToAdd.Position = new Vector2(this.Position.X + (cellTextureSize.X) * i, this.Position.Y - (cellTextureSize.Y) * j);
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace ChecktheGreat.scripts;
@@ -23,7 +24,14 @@ public partial class BoardManager : Node2D
         AddChild(boardSpawned);
         
         Board = boardSpawned;
-        bool boardInitialized = Board.InitializeBoard(8, 8);
+        var emptyCells = new HashSet<CellPosition>()
+        {
+            new CellPosition(2, 2),
+            new CellPosition(2, 3),
+            new CellPosition(4, 7)
+        };
+        
+        bool boardInitialized = Board.InitializeBoard(8, 8, emptyCells);
 
         if (boardInitialized)
         {
