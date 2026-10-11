@@ -3,10 +3,26 @@
 [ext_resource type="Script" uid="uid://pob0vwecjknl" path="res://scripts/Cell.cs" id="1_upbjj"]
 [ext_resource type="Texture2D" uid="uid://dmc0nvarkpgki" path="res://assets/light_cell.png" id="2_nm02e"]
 [ext_resource type="Texture2D" uid="uid://dbvac8xm6g8oc" path="res://assets/dark_cell.png" id="3_ds1sf"]
+[ext_resource type="Texture2D" uid="uid://dhcylg786vl0h" path="res://assets/highlight_light_cell.png" id="4_ecwuj"]
+[ext_resource type="Texture2D" uid="uid://c2cdfmnc14148" path="res://assets/highlight_dark_cell.png" id="5_k6tqi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm02e"]
+size = Vector2(16, 16)
 
 [node name="cell" type="Node2D" unique_id=958663218]
 script = ExtResource("1_upbjj")
 _lightTexture = ExtResource("2_nm02e")
 _darkTexture = ExtResource("3_ds1sf")
+_highlightLightTexture = ExtResource("4_ecwuj")
+_highlightDarkTexture = ExtResource("5_k6tqi")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1068186686]
+[node name="sprite" type="Sprite2D" parent="." unique_id=1068186686]
+texture = ExtResource("3_ds1sf")
+
+[node name="highlight_sprite" type="Sprite2D" parent="." unique_id=611167415]
+visible = false
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1554208000]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=100127511]
+shape = SubResource("RectangleShape2D_nm02e")
