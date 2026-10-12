@@ -16,19 +16,6 @@ public partial class PieceManager : Node
     public void SetBoardManager(BoardManager boardManager)
     {
         BoardManager = boardManager;
-        BoardManager.BoardReady += HandleBoardReadyEvent;
-    }
-
-    public override void _ExitTree()
-    {
-        if (BoardManager != null)
-        {
-            BoardManager.BoardReady -= HandleBoardReadyEvent;
-        }
-    }
-
-    private void HandleBoardReadyEvent()
-    {
     }
 
     public void SpawnPawn(CellPosition startingPosition, PieceType pieceType, PieceHouse pieceHouse)
@@ -107,5 +94,13 @@ public partial class PieceManager : Node
                 throw new ArgumentOutOfRangeException(nameof(pieceType), pieceType, null);
         }
         return null;
+    }
+
+    public void InitializePieces(Level level)
+    {
+        foreach (var enemyInitialization in level.Enemies)
+        {
+            SpawnPawn(enemyInitialization.StartingPosition, enemyInitialization.PieceType, PieceHouse.Dark);
+        }
     }
 }

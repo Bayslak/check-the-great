@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://d3rj8hx8r5s0a"]
 
+[ext_resource type="Script" uid="uid://bnhtgedytuapf" path="res://scripts/GameManager.cs" id="1_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://birydr8jf1hmp" path="res://scenes/board.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://djbi8v2kfdmsw" path="res://scripts/BoardManager.cs" id="1_sugp2"]
 [ext_resource type="Script" uid="uid://c3q0horgptqao" path="res://scripts/PieceManager.cs" id="3_jyhfs"]
@@ -19,6 +20,11 @@
 [ext_resource type="Script" uid="uid://ck4dvymj3q75l" path="res://scripts/Camera.cs" id="17_muem4"]
 
 [node name="main" type="Node2D" unique_id=520177350]
+
+[node name="game_manager" type="Node" parent="." unique_id=862210037 node_paths=PackedStringArray("_boardManager", "_pieceManager")]
+script = ExtResource("1_dp3eg")
+_boardManager = NodePath("../board_manager")
+_pieceManager = NodePath("../piece_manager")
 
 [node name="board_manager" type="Node2D" parent="." unique_id=505502747 node_paths=PackedStringArray("PieceManager")]
 script = ExtResource("1_sugp2")
