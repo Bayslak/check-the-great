@@ -1,17 +1,22 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 namespace ChecktheGreat.scripts;
 
 public partial class Board : Node2D
 {
+    private BoardManager _boardManager;
+    
     [Export] private PackedScene _cellPrefab;
     public int Rows, Cols;
     private Dictionary<CellPosition, Cell> _tiles = [];
     
     public Vector2 CellTextureSize = Vector2.Zero;
 
-    public bool InitializeBoard(Level level)
+    public bool InitializeBoard(Level level, BoardManager boardManager)
     {
+        _boardManager = boardManager;
+        
         Rows = level.Rows;
         Cols = level.Columns;
         
@@ -30,7 +35,7 @@ public partial class Board : Node2D
                 
                 var cellToAdd = _cellPrefab.Instantiate<Cell>();
 
-                cellToAdd.InitializeCell(lightCell);
+                cellToAdd.InitializeCell(lightCell, this);
                 cellToAdd.Name = $"Cell_{i}_{j}_" + (lightCell ? "Light" : "Dark");
 
                 if (CellTextureSize == Vector2.Zero)
@@ -53,5 +58,15 @@ public partial class Board : Node2D
     public Cell GetCellByCellPosition(CellPosition position)
     {
         return _tiles[position];
+    }
+
+    public CellPosition GetCellPositionByCell(Cell cell)
+    {
+        return _tiles.FirstOrDefault(x => x.Value == cell).Key;
+    }
+
+    public void SetCellHovered(Cell? cell)
+    {
+        _boardManager.SetHoveredCell(cell);
     }
 }

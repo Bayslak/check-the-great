@@ -18,13 +18,15 @@
 [ext_resource type="Texture2D" uid="uid://brll0h1nv8t1f" path="res://assets/light_queen.png" id="15_y6deb"]
 [ext_resource type="Texture2D" uid="uid://26beuj5t4gth" path="res://assets/light_king.png" id="16_og1vs"]
 [ext_resource type="Script" uid="uid://ck4dvymj3q75l" path="res://scripts/Camera.cs" id="17_muem4"]
+[ext_resource type="Script" uid="uid://qmnjvkngyuvg" path="res://scripts/PlayerPiecePlacer.cs" id="18_0ld40"]
 
 [node name="main" type="Node2D" unique_id=520177350]
 
-[node name="game_manager" type="Node" parent="." unique_id=862210037 node_paths=PackedStringArray("_boardManager", "_pieceManager")]
+[node name="game_manager" type="Node" parent="." unique_id=862210037 node_paths=PackedStringArray("_boardManager", "_pieceManager", "_playerPiecePlacer")]
 script = ExtResource("1_dp3eg")
 _boardManager = NodePath("../board_manager")
 _pieceManager = NodePath("../piece_manager")
+_playerPiecePlacer = NodePath("../player_piece_placer")
 
 [node name="board_manager" type="Node2D" parent="." unique_id=505502747 node_paths=PackedStringArray("PieceManager")]
 script = ExtResource("1_sugp2")
@@ -47,6 +49,12 @@ _whiteRook = ExtResource("14_pm3ni")
 _whiteQueen = ExtResource("15_y6deb")
 _whiteKing = ExtResource("16_og1vs")
 BoardManager = NodePath("../board_manager")
+
+[node name="player_piece_placer" type="Node2D" parent="." unique_id=462330111 node_paths=PackedStringArray("_gameManager", "_boardManager", "_pieceManager")]
+script = ExtResource("18_0ld40")
+_gameManager = NodePath("../game_manager")
+_boardManager = NodePath("../board_manager")
+_pieceManager = NodePath("../piece_manager")
 
 [node name="camera" type="Camera2D" parent="." unique_id=1919428505]
 zoom = Vector2(1.5, 1.5)

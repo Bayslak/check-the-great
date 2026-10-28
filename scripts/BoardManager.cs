@@ -11,6 +11,8 @@ public partial class BoardManager : Node2D
     [Export] public Board Board;
 
     public event Action BoardReady;
+
+    public Cell? HoveredCell;
     
     private void PositionBoardManager(Level level)
     {
@@ -31,11 +33,24 @@ public partial class BoardManager : Node2D
         AddChild(boardSpawned);
         
         Board = boardSpawned;
-        _ = Board.InitializeBoard(level);
+        _ = Board.InitializeBoard(level, this);
     }
     
     public Cell GetCellByPosition(CellPosition position)
     {
         return Board.GetCellByCellPosition(position);
+    }
+
+    public CellPosition GetCellPositionByCell(Cell cell)
+    {
+        return Board.GetCellPositionByCell(cell);
+    }
+
+    public void SetHoveredCell(Cell? cell)
+    {
+        HoveredCell = cell;
+
+        if (cell != null)
+            GD.Print("Hovered cell: " + cell.Name);
     }
 }

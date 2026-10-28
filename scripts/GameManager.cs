@@ -11,6 +11,8 @@ public partial class GameManager : Node
     public Action<GameState> GameStateChanged;
     public GameState CurrentGameState;
     
+    [Export] private PlayerPiecePlacer _playerPiecePlacer;
+    
     public override void _Ready()
     {
         CurrentGameState = GameState.Initialization;
@@ -32,18 +34,19 @@ public partial class GameManager : Node
     {
         switch (enteredState)
         {
-
             case GameState.Initialization:
                 StartLevel();
                 ChangeGameState(GameState.PiecesPlacement);
                 break;
             case GameState.PiecesPlacement:
-                //TODO: enable pieces placement
+                _playerPiecePlacer.Enable(2);
                 break;
             case GameState.Level:
                 //TODO: implement turn system
                 break;
         }
+        
+        GD.Print("Entered state: " + enteredState);
     }
 
     private void ExitState(GameState exitedState)
@@ -68,11 +71,8 @@ public partial class GameManager : Node
         _pieceManager.InitializePieces(level);
     }
 
-}
-
-public enum GameState
-{
-    Initialization,
-    PiecesPlacement,
-    Level
+    public void PlayerPiecePlacerDisabled()
+    {
+        ChangeGameState(GameState.Level);
+    }
 }
