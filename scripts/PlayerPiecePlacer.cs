@@ -13,15 +13,20 @@ public partial class PlayerPiecePlacer : Node2D
 
     public override void _Input(InputEvent @event)
     {
+        if(!Enabled) return;
+        
         base._Input(@event);
 
         if (@event is not InputEventMouseButton mouseEvent)
             return;
-        
+
         if (mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.Pressed && !mouseEvent.IsEcho()) // study IsEcho()
         {
             PlacePiece();
             //@event.Dispose();
+
+            if (NumberOfPiecesToPlace == _numberOfPiecesPlaced)
+                Disable();
         }
     }
 
