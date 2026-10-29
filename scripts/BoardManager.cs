@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace ChecktheGreat.scripts;
@@ -34,6 +35,8 @@ public partial class BoardManager : Node2D
         
         Board = boardSpawned;
         _ = Board.InitializeBoard(level, this);
+        
+        BoardReady?.Invoke();
     }
     
     public Cell GetCellByPosition(CellPosition position)
@@ -52,5 +55,24 @@ public partial class BoardManager : Node2D
 
         if (cell != null)
             GD.Print("Hovered cell: " + cell.Name);
+    }
+
+    public void HighlightStartingTiles(HashSet<CellPosition> currentLevelStartingTiles)
+    {
+        foreach (var kvp in Board.Tiles)
+        {
+            if (currentLevelStartingTiles.Contains(kvp.Key))
+                Board.Tiles[kvp.Key].SetStartingTile(true);
+        }
+    }
+
+    public void DeHighlightTiles()
+    {
+        foreach (var kvp in Board.Tiles)
+        {
+            var cell = kvp.Value;
+            if (cell.IsStartingTile)
+                cell.SetStartingTile(false);
+        }
     }
 }

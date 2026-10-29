@@ -9,7 +9,7 @@ public partial class Board : Node2D
     
     [Export] private PackedScene _cellPrefab;
     public int Rows, Cols;
-    private Dictionary<CellPosition, Cell> _tiles = [];
+    public Dictionary<CellPosition, Cell> Tiles = [];
     
     public Vector2 CellTextureSize = Vector2.Zero;
 
@@ -20,7 +20,7 @@ public partial class Board : Node2D
         Rows = level.Rows;
         Cols = level.Columns;
         
-        _tiles = new Dictionary<CellPosition, Cell>();
+        Tiles = new Dictionary<CellPosition, Cell>();
         var emptyTiles = level.EmptyTiles;
 
         bool lightCell = true;
@@ -43,7 +43,7 @@ public partial class Board : Node2D
                     CellTextureSize = cellToAdd.GetTextureSize();
                 }
                 
-                _tiles.Add(cellPosition, cellToAdd);
+                Tiles.Add(cellPosition, cellToAdd);
                 AddChild(cellToAdd);
                 
                 cellToAdd.Position = new Vector2(this.Position.X + (CellTextureSize.X) * i, this.Position.Y - (CellTextureSize.Y) * j);
@@ -57,12 +57,12 @@ public partial class Board : Node2D
 
     public Cell GetCellByCellPosition(CellPosition position)
     {
-        return _tiles[position];
+        return Tiles[position];
     }
 
     public CellPosition GetCellPositionByCell(Cell cell)
     {
-        return _tiles.FirstOrDefault(x => x.Value == cell).Key;
+        return Tiles.FirstOrDefault(x => x.Value == cell).Key;
     }
 
     public void SetCellHovered(Cell? cell)

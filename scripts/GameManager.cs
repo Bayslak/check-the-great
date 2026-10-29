@@ -12,6 +12,8 @@ public partial class GameManager : Node
     public GameState CurrentGameState;
     
     [Export] private PlayerPiecePlacer _playerPiecePlacer;
+
+    private Level _currentLevel;
     
     public override void _Ready()
     {
@@ -39,7 +41,9 @@ public partial class GameManager : Node
                 ChangeGameState(GameState.PiecesPlacement);
                 break;
             case GameState.PiecesPlacement:
-                _playerPiecePlacer.Enable(2);
+                _pieceManager.InitializePieces(_currentLevel);
+                _playerPiecePlacer.Enable(2, _currentLevel.StartingTiles);
+                _boardManager.HighlightStartingTiles(_currentLevel.StartingTiles);
                 break;
             case GameState.Level:
                 //TODO: implement turn system
@@ -54,7 +58,7 @@ public partial class GameManager : Node
         switch (exitedState)
         {
             case GameState.PiecesPlacement:
-                //TODO: disable pieces placement
+                _boardManager.DeHighlightTiles();
                 break;
             case GameState.Level:
                 //TODO: clean up level
@@ -66,9 +70,10 @@ public partial class GameManager : Node
     {
         string levelJson = File.ReadAllText("resources/level_test.json");
         var level = Level.LoadFromJson(levelJson);
+        _currentLevel = level;
         
         _boardManager.InitializeBoard(level);
-        _pieceManager.InitializePieces(level);
+        //_pieceManager.InitializePieces(level);
     }
 
     public void PlayerPiecePlacerDisabled()
