@@ -10,4 +10,9 @@
   <ItemGroup>
     <Content Include="resources\level_test.json" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CheckTheGreat.Application\CheckTheGreat.Application.csproj" />
+    <ProjectReference Include="..\CheckTheGreat.Domain\CheckTheGreat.Domain.csproj" />
+  </ItemGroup>
 </Project>

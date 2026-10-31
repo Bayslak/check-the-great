@@ -1,0 +1,12 @@
+D:\Projects\check-the-great\CheckTheGreat.Domain\bin\Debug\net10.0\CheckTheGreat.Domain.deps.json
+D:\Projects\check-the-great\CheckTheGreat.Domain\bin\Debug\net10.0\CheckTheGreat.Domain.dll
+D:\Projects\check-the-great\CheckTheGreat.Domain\bin\Debug\net10.0\CheckTheGreat.Domain.pdb
+D:\Projects\check-the-great\CheckTheGreat.Domain\obj\Debug\net10.0\CheckTheGreat.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\check-the-great\CheckTheGreat.Domain\obj\Debug\net10.0\CheckTheGreat.Domain.AssemblyInfoInputs.cache
+D:\Projects\check-the-great\CheckTheGreat.Domain\obj\Debug\net10.0\CheckTheGreat.Domain.AssemblyInfo.cs
+D:\Projects\check-the-great\CheckTheGreat.Domain\obj\Debug\net10.0\CheckTheGreat.Domain.csproj.CoreCompileInputs.cache
+D:\Projects\check-the-great\CheckTheGreat.Domain\obj\Debug\net10.0\CheckTheGreat.Domain.sourcelink.json
+D:\Projects\check-the-great\CheckTheGreat.Domain\obj\Debug\net10.0\CheckTheGreat.Domain.dll
+D:\Projects\check-the-great\CheckTheGreat.Domain\obj\Debug\net10.0\refint\CheckTheGreat.Domain.dll
+D:\Projects\check-the-great\CheckTheGreat.Domain\obj\Debug\net10.0\CheckTheGreat.Domain.pdb
+D:\Projects\check-the-great\CheckTheGreat.Domain\obj\Debug\net10.0\ref\CheckTheGreat.Domain.dll
