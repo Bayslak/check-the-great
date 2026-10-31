@@ -1,6 +1,28 @@
-# Godot 4+ specific ignores
+# Godot: cache e file generati, anche nelle sottocartelle
 .godot/
-/android/
 
+# Godot: build Android generata
+/CheckTheGreat.Godot/android/
+
+# .NET: output di compilazione
+[Bb]in/
+[Oo]bj/
+
+# IDE: impostazioni e cache locali
 .idea/
-.editorconfig
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.iml
+
+# Backup dei file di progetto
+*.csproj.old
+
+# File temporanei
+*.tmp
+*.bak
+
+# File del sistema operativo
+.DS_Store
+Thumbs.db

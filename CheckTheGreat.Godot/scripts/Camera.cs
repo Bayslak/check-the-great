@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace CheckTheGreat.Godot.scripts;
 
 public partial class Camera : Camera2D
 {

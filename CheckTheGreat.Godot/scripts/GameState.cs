@@ -1,4 +1,6 @@
-﻿public enum GameState
+﻿namespace CheckTheGreat.Godot.scripts;
+
+public enum GameState
 {
     Initialization,
     PiecesPlacement,

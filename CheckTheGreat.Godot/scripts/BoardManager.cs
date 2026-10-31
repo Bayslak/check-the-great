@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Godot;
 
-namespace ChecktheGreat.scripts;
+namespace CheckTheGreat.Godot.scripts;
 
 public partial class BoardManager : Node2D
 {

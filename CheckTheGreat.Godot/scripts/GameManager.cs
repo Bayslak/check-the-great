@@ -1,7 +1,8 @@
 using System;
 using System.IO;
-using ChecktheGreat.scripts;
 using Godot;
+
+namespace CheckTheGreat.Godot.scripts;
 
 public partial class GameManager : Node
 {

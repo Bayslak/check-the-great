@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ChecktheGreat.scripts;
+namespace CheckTheGreat.Godot.scripts;
 
 public class EnemyInitialization
 {

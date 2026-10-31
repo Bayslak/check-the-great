@@ -1,5 +1,6 @@
 using Godot;
-namespace ChecktheGreat.scripts;
+
+namespace CheckTheGreat.Godot.scripts;
 
 public partial class Piece : Node2D
 {

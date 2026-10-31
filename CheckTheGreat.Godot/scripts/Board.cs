@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-namespace ChecktheGreat.scripts;
+
+namespace CheckTheGreat.Godot.scripts;
 
 public partial class Board : Node2D
 {
