@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Check the Great", "Check the Great.csproj", "{52C6B645-F26C-4B47-B693-E0946E1B3247}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckTheGreat.Godot", "CheckTheGreat.Godot.csproj", "{52C6B645-F26C-4B47-B693-E0946E1B3247}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
