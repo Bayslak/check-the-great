@@ -119,8 +119,19 @@ public partial class GameManager : Node
         var fromPosition = new CellPosition(moveResult.Move.From.X + 1, moveResult.Move.From.Y + 1);
         var toPosition =  new CellPosition(moveResult.Move.To.X + 1, moveResult.Move.To.Y + 1);
 
-        var pieceMoving = _pieceManager.Pieces[fromPosition];
-        _pieceManager.MovePiece(pieceMoving, fromPosition, toPosition);
+        switch (moveResult.Move.Mode)
+        {
+            case MoveMode.MoveOnly:
+                _pieceManager.MovePiece(fromPosition, toPosition);
+                break;
+            case MoveMode.CaptureOnly:
+            case MoveMode.MoveOrCapture:
+                _pieceManager.MovePieceOrCapture(fromPosition, toPosition);
+                break;
+            default:
+                GD.PrintErr($"Unknown move mode: {moveResult.Move.Mode}. Rotty didn't implemented it.");
+                break;
+        }
 
         _turnManager.AdvanceTurn();
     }

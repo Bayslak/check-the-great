@@ -90,7 +90,7 @@ public partial class BoardManager : Node2D
     {
         foreach (var boardTile in Board.Tiles)
         {
-            if(boardTile.Value.IsHighlighted)
+            if(boardTile.Value.IsPossibleMove)
                 boardTile.Value.SetAsPossibleMove(false);
         }
     }

@@ -117,12 +117,32 @@ public partial class PieceManager : Node
         PiecesInitialized?.Invoke();
     }
 
-    public void MovePiece(Piece pieceMoving, CellPosition fromPosition, CellPosition toPosition)
+    public void MovePiece(CellPosition fromPosition, CellPosition toPosition)
     {
         var cellToMoveTo = BoardManager.GetCellByPosition(toPosition);
+        var pieceMoving = Pieces[fromPosition];
         pieceMoving.GlobalPosition = cellToMoveTo.GlobalPosition;
         
         Pieces.Remove(fromPosition);
+        Pieces.Add(toPosition, pieceMoving);
+    }
+
+    public void MovePieceOrCapture(CellPosition fromPosition, CellPosition toPosition)
+    {
+        var cellToMoveTo = BoardManager.GetCellByPosition(toPosition);
+        
+        var pieceMoving = Pieces[fromPosition];
+        
+        Pieces.TryGetValue(toPosition, out var capturedPiece);
+
+        if (capturedPiece != null)
+        {
+            capturedPiece.QueueFree();
+            Pieces.Remove(toPosition);
+        }
+        
+        Pieces.Remove(fromPosition);
+        pieceMoving.GlobalPosition = cellToMoveTo.GlobalPosition;
         Pieces.Add(toPosition, pieceMoving);
     }
 }

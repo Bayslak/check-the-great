@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#nullable enable
+using System.Collections.Generic;
 using CheckTheGreat.AI.Search;
 using CheckTheGreat.Domain.Board;
 using CheckTheGreat.Domain.Matches;
@@ -12,13 +13,13 @@ public partial class TurnManager : Node2D
     [Export] public bool Enabled { get; set; }
     [Export] public Turn Turn { get; set; } = Turn.None;
 
-    private GameManager _gameManager;
-    private BoardManager _boardManager;
-    private PieceManager _pieceManager;
+    private GameManager _gameManager = null!;
+    private BoardManager _boardManager = null!;
+    private PieceManager _pieceManager = null!;
 
-    private Piece _selectedPiece;
+    private Piece? _selectedPiece;
     private CellPosition _selectedPieceStartingPosition;
-    private Dictionary<CellPosition, Move> _possibleMoves = [];
+    private readonly Dictionary<CellPosition, Move> _possibleMoves = [];
 
     public override void _Input(InputEvent @event)
     {
@@ -44,14 +45,7 @@ public partial class TurnManager : Node2D
         var position = _boardManager.GetCellPositionByCell(_boardManager.HoveredCell);
         _pieceManager.Pieces.TryGetValue(position, out var piece);
         
-        // rethink, rethink, rethink
-        if (piece != null && piece.House != PieceHouse.Light)
-        {
-            GD.PrintErr("Not your piece bro");
-            return;
-        }
-
-        if (piece != null)
+        if (piece?.House == PieceHouse.Light)
         {
             _boardManager.UnsetPossibleMoves();
             _possibleMoves.Clear();
