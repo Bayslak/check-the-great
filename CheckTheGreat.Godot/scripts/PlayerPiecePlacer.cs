@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using ChecktheGreat.scripts;
 using Godot;
+
+namespace CheckTheGreat.Godot.scripts;
 
 public partial class PlayerPiecePlacer : Node2D
 {

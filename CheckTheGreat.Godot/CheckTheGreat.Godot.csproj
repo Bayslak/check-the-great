@@ -1,0 +1,17 @@
+<Project Sdk="Godot.NET.Sdk/4.7.2">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14.0</LangVersion>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <AssemblyName>CheckTheGreat.Godot</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="resources\level_test.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CheckTheGreat.Application\CheckTheGreat.Application.csproj" />
+    <ProjectReference Include="..\CheckTheGreat.Domain\CheckTheGreat.Domain.csproj" />
+  </ItemGroup>
+</Project>

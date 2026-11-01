@@ -1,4 +1,4 @@
-﻿namespace ChecktheGreat.scripts;
+﻿namespace CheckTheGreat.Godot.scripts;
 
 public readonly record struct CellPosition(int Col, int Row)
 {
