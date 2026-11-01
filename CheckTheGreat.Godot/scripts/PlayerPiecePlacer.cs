@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace CheckTheGreat.Godot.scripts;
@@ -26,7 +27,7 @@ public partial class PlayerPiecePlacer : Node2D
 
         if (mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.Pressed && !mouseEvent.IsEcho()) // study IsEcho()
         {
-            PlacePiece();
+            //PlacePiece();
             //@event.Dispose();
 
             if (NumberOfPiecesToPlace == _numberOfPiecesPlaced)
@@ -50,7 +51,7 @@ public partial class PlayerPiecePlacer : Node2D
             return;
         }
         
-        _pieceManager.SpawnPawn(position, PieceType.King, PieceHouse.Light);
+        _pieceManager.SpawnPawn(Guid.NewGuid().ToString(), position, PieceType.King, PieceHouse.Light);
         
         _numberOfPiecesPlaced++;
     }
@@ -70,7 +71,7 @@ public partial class PlayerPiecePlacer : Node2D
             Disable();
     }
     
-    private void Disable()
+    public void Disable()
     {
         Enabled = false;
         

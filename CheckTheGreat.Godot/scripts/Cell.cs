@@ -11,8 +11,9 @@ public partial class Cell : Node2D
     [Export] private Texture2D _highlightLightTexture, _highlightDarkTexture;
 
     [Export] private Area2D _area2D;
-    public bool IsHighlighted;
-    public bool IsStartingTile;
+    [Export] public bool IsHighlighted;
+    [Export] public bool IsPossibleMove;
+    [Export] public bool IsStartingTile;
     
     public override void _Ready()
     {
@@ -85,5 +86,13 @@ public partial class Cell : Node2D
         
         _startingTileSprite.Visible = value;
         IsStartingTile = value;
+    }
+
+    public void SetAsPossibleMove(bool value)
+    {
+        _startingTileSprite ??= GetNode<Sprite2D>("starting_tile_sprite");
+        
+        _startingTileSprite.Visible = value;
+        IsPossibleMove = value;
     }
 }

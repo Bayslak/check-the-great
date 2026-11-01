@@ -19,13 +19,15 @@
 [ext_resource type="Texture2D" uid="uid://26beuj5t4gth" path="res://assets/light_king.png" id="16_og1vs"]
 [ext_resource type="Script" uid="uid://ck4dvymj3q75l" path="res://scripts/Camera.cs" id="17_muem4"]
 [ext_resource type="Script" uid="uid://qmnjvkngyuvg" path="res://scripts/PlayerPiecePlacer.cs" id="18_0ld40"]
+[ext_resource type="Script" uid="uid://csepucdwr8ar3" path="res://scripts/TurnManager.cs" id="18_gqmmt"]
 
 [node name="main" type="Node2D" unique_id=520177350]
 
-[node name="game_manager" type="Node" parent="." unique_id=862210037 node_paths=PackedStringArray("_boardManager", "_pieceManager", "_playerPiecePlacer")]
+[node name="game_manager" type="Node" parent="." unique_id=862210037 node_paths=PackedStringArray("_boardManager", "_pieceManager", "_turnManager", "_playerPiecePlacer")]
 script = ExtResource("1_dp3eg")
 _boardManager = NodePath("../board_manager")
 _pieceManager = NodePath("../piece_manager")
+_turnManager = NodePath("../turn_manager")
 _playerPiecePlacer = NodePath("../player_piece_placer")
 
 [node name="board_manager" type="Node2D" parent="." unique_id=505502747 node_paths=PackedStringArray("PieceManager")]
@@ -49,6 +51,9 @@ _whiteRook = ExtResource("14_pm3ni")
 _whiteQueen = ExtResource("15_y6deb")
 _whiteKing = ExtResource("16_og1vs")
 BoardManager = NodePath("../board_manager")
+
+[node name="turn_manager" type="Node2D" parent="." unique_id=1078144745]
+script = ExtResource("18_gqmmt")
 
 [node name="player_piece_placer" type="Node2D" parent="." unique_id=462330111 node_paths=PackedStringArray("_gameManager", "_boardManager", "_pieceManager")]
 script = ExtResource("18_0ld40")

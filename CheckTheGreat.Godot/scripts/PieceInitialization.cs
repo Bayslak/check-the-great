@@ -4,8 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace CheckTheGreat.Godot.scripts;
 
-public class EnemyInitialization
+public class PieceInitialization
 {
+    [JsonPropertyName("id")] public string Id { get; set; } = Guid.NewGuid().ToString();
     [JsonPropertyName("piece_type")] public string PieceTypeJson { get; set; }
     [JsonIgnore] public PieceType PieceType => Enum.Parse<PieceType>(PieceTypeJson);
     [JsonPropertyName("starting_position")] public string StartingPositionJson { get; set; }
@@ -13,15 +14,14 @@ public class EnemyInitialization
     [JsonIgnore]
     public CellPosition StartingPosition => CellPosition.FromJson(StartingPositionJson);
     
-
     public string ToJson()
     {
         return $"{StartingPosition.Col},{StartingPosition.Row}";
     }
 
-    public static EnemyInitialization FromJson(string json)
+    public static PieceInitialization FromJson(string json)
     {
-        var enemyInitialization = JsonSerializer.Deserialize<EnemyInitialization>(json);
+        var enemyInitialization = JsonSerializer.Deserialize<PieceInitialization>(json);
         return enemyInitialization;
     }
 }

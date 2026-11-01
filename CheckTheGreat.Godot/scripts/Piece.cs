@@ -4,6 +4,7 @@ namespace CheckTheGreat.Godot.scripts;
 
 public partial class Piece : Node2D
 {
+    public string Id { get; set; } // maybe better private setter
     private Sprite2D _sprite2D;
 
     [Export] public PieceHouse House;

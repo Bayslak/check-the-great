@@ -9,18 +9,22 @@ public partial class PieceManager : Node
     [Export] private PackedScene _piecePrefab;
     [Export] private Texture2D _blackPawn, _blackKnight, _blackBishop, _blackRook, _blackQueen, _blackKing;
     [Export] private Texture2D _whitePawn, _whiteKnight, _whiteBishop, _whiteRook, _whiteQueen, _whiteKing;
-    public Dictionary<CellPosition, Piece> Pieces = [];
-    
+    public readonly Dictionary<CellPosition, Piece> Pieces = [];
+
     [Export] public BoardManager BoardManager;
 
+    public event Action PiecesInitialized;
+    
     public void SetBoardManager(BoardManager boardManager)
     {
         BoardManager = boardManager;
     }
 
-    public void SpawnPawn(CellPosition startingPosition, PieceType pieceType, PieceHouse pieceHouse)
+    public void SpawnPawn(string id, CellPosition startingPosition, PieceType pieceType, PieceHouse pieceHouse)
     {
         var pawnSpawned = _piecePrefab.Instantiate<Piece>();
+        pawnSpawned.Id = id;
+        
         AddChild(pawnSpawned);
 
         var texture2d = GuessTexture(pieceType, pieceHouse);
@@ -30,6 +34,7 @@ public partial class PieceManager : Node
         var cell = BoardManager.GetCellByPosition(startingPosition);
         
         pawnSpawned.Position = cell.GlobalPosition;
+        Pieces.Add(startingPosition, pawnSpawned);
     }
 
     private Texture2D GuessTexture(PieceType pieceType, PieceHouse pieceHouse)
@@ -100,7 +105,44 @@ public partial class PieceManager : Node
     {
         foreach (var enemyInitialization in level.Enemies)
         {
-            SpawnPawn(enemyInitialization.StartingPosition, enemyInitialization.PieceType, PieceHouse.Dark);
+            SpawnPawn(enemyInitialization.Id, enemyInitialization.StartingPosition, enemyInitialization.PieceType, PieceHouse.Dark);
         }
+
+        // To rethink when outside simple chess
+        foreach (var friendlyInitialization in level.Friendlies)
+        {
+            SpawnPawn(friendlyInitialization.Id, friendlyInitialization.StartingPosition, friendlyInitialization.PieceType, PieceHouse.Light);
+        }
+        
+        PiecesInitialized?.Invoke();
+    }
+
+    public void MovePiece(CellPosition fromPosition, CellPosition toPosition)
+    {
+        var cellToMoveTo = BoardManager.GetCellByPosition(toPosition);
+        var pieceMoving = Pieces[fromPosition];
+        pieceMoving.GlobalPosition = cellToMoveTo.GlobalPosition;
+        
+        Pieces.Remove(fromPosition);
+        Pieces.Add(toPosition, pieceMoving);
+    }
+
+    public void MovePieceOrCapture(CellPosition fromPosition, CellPosition toPosition)
+    {
+        var cellToMoveTo = BoardManager.GetCellByPosition(toPosition);
+        
+        var pieceMoving = Pieces[fromPosition];
+        
+        Pieces.TryGetValue(toPosition, out var capturedPiece);
+
+        if (capturedPiece != null)
+        {
+            capturedPiece.QueueFree();
+            Pieces.Remove(toPosition);
+        }
+        
+        Pieces.Remove(fromPosition);
+        pieceMoving.GlobalPosition = cellToMoveTo.GlobalPosition;
+        Pieces.Add(toPosition, pieceMoving);
     }
 }
