@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using System.Linq;
+using CheckTheGreat.Application.Matches;
 using Godot;
 
 namespace CheckTheGreat.Godot.scripts;
@@ -43,8 +45,8 @@ public partial class GameManager : Node
                 break;
             case GameState.PiecesPlacement:
                 _pieceManager.InitializePieces(_currentLevel);
-                _playerPiecePlacer.Enable(2, _currentLevel.StartingTiles);
-                _boardManager.HighlightStartingTiles(_currentLevel.StartingTiles);
+                //_playerPiecePlacer.Enable(2, _currentLevel.StartingTiles);
+                //_boardManager.HighlightStartingTiles(_currentLevel.StartingTiles);
                 break;
             case GameState.Level:
                 //TODO: implement turn system
@@ -69,11 +71,14 @@ public partial class GameManager : Node
     
     private void StartLevel()
     {
-        string levelJson = File.ReadAllText("resources/level_test.json");
-        var level = Level.LoadFromJson(levelJson);
-        _currentLevel = level;
+        var gameState = InitialPositionFactory.CreateStandard();
+        var gameLevel = Level.LoadFromGameState(gameState);
         
-        _boardManager.InitializeBoard(level);
+        //string levelJson = File.ReadAllText("resources/level_test.json");
+        //var level = Level.LoadFromJson(levelJson);
+        _currentLevel = gameLevel;
+        
+        _boardManager.InitializeBoard(_currentLevel);
         //_pieceManager.InitializePieces(level);
     }
 

@@ -11,6 +11,8 @@ public sealed record Bishop(int Id, Side Owner) : Piece(Id, Owner)
         (-1, 1), (1, 1)
     ];
 
+    public override PieceType GetPieceType() => PieceType.Bishop;
+
     public override IReadOnlyList<Move> GetCandidateMoves(
         GameState state,
         Square fromSq)

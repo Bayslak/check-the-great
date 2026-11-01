@@ -11,6 +11,8 @@ public sealed record Rook(int Id, Side Owner) : Piece(Id, Owner)
         (0, 1), (-1, 0)
     ];
 
+    public override PieceType GetPieceType() => PieceType.Rook;
+
     public override IReadOnlyList<Move> GetCandidateMoves(
         GameState state,
         Square fromSq)

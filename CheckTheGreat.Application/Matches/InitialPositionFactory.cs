@@ -38,7 +38,7 @@ public static class InitialPositionFactory
         var id = 1;
 
         AddSide(Side.White, backRank: 0, pawnRank: 1);
-        AddSide(Side.White, backRank: 7, pawnRank: 6);
+        AddSide(Side.Black, backRank: 7, pawnRank: 6);
 
         return new GameState(board, pieces, Side.White);
 

@@ -10,7 +10,9 @@ public sealed record Knight(int Id, Side Owner) : Piece(Id, Owner)
         (1, 2), (2, 1), (2, -1), (1, -2),
         (-1, -2), (-2, -1), (-2, 1), (-1, 2)
     };
-    
+
+    public override PieceType GetPieceType() => PieceType.Knight;
+
     public override IReadOnlyList<Move> GetCandidateMoves(GameState state, Square fromSq)
     {
         var moves= KnightOffsets.Select(offset =>

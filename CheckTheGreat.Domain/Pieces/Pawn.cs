@@ -5,6 +5,9 @@ namespace CheckTheGreat.Domain.Pieces;
 
 public sealed record Pawn(int Id, Side Owner, bool CanCaptureSideways = false) : Piece(Id, Owner)
 {
+
+    public override PieceType GetPieceType() => PieceType.Pawn;
+
     public override IReadOnlyList<Move> GetCandidateMoves(GameState state, Square fromSq)
     {
         var dy = (int)Owner * 1;

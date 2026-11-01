@@ -102,5 +102,11 @@ public partial class PieceManager : Node
         {
             SpawnPawn(enemyInitialization.StartingPosition, enemyInitialization.PieceType, PieceHouse.Dark);
         }
+
+        // To rethink when outside simple chess
+        foreach (var friendlyInitialization in level.Friendlies)
+        {
+            SpawnPawn(friendlyInitialization.StartingPosition, friendlyInitialization.PieceType, PieceHouse.Light);
+        }
     }
 }

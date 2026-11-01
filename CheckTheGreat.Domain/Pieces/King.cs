@@ -5,6 +5,8 @@ namespace CheckTheGreat.Domain.Pieces;
 
 public sealed record King(int Id, Side Owner) : Piece(Id, Owner)
 {
+    public override PieceType GetPieceType() => PieceType.King;
+
     public override IReadOnlyList<Move> GetCandidateMoves(GameState state, Square fromSq)
     {
         var moves = new List<Move>();
