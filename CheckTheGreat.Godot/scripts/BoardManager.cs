@@ -53,8 +53,8 @@ public partial class BoardManager : Node2D
     {
         HoveredCell = cell;
 
-        if (cell != null)
-            GD.Print("Hovered cell: " + cell.Name);
+        //if (cell != null)
+        //    GD.Print("Hovered cell: " + cell.Name);
     }
 
     public void HighlightStartingTiles(HashSet<CellPosition> currentLevelStartingTiles)
