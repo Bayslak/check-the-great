@@ -75,4 +75,23 @@ public partial class BoardManager : Node2D
                 cell.SetStartingTile(false);
         }
     }
+
+    // Rethink all this possible move things. I am using wrongly the property Highlighted
+    public void HighlightPossibleMoves(HashSet<CellPosition> possibleCellPositions)
+    {
+        foreach (var boardTile in Board.Tiles)
+        {
+            if(possibleCellPositions.Contains(boardTile.Key))
+                boardTile.Value.SetAsPossibleMove(true);
+        }
+    }
+
+    public void UnsetPossibleMoves()
+    {
+        foreach (var boardTile in Board.Tiles)
+        {
+            if(boardTile.Value.IsHighlighted)
+                boardTile.Value.SetAsPossibleMove(false);
+        }
+    }
 }

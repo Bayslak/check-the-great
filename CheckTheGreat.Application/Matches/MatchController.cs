@@ -1,5 +1,7 @@
 ﻿using CheckTheGreat.AI.Search;
+using CheckTheGreat.Domain.Board;
 using CheckTheGreat.Domain.Matches;
+using CheckTheGreat.Domain.Pieces;
 using CheckTheGreat.Domain.Rules;
 
 namespace CheckTheGreat.Application.Matches;
@@ -15,6 +17,18 @@ public sealed class MatchController(
     private GameOutcome Outcome => rules.GetOutcome(State);
     public bool IsThinking { get; private set; }
 
+    public GameState GetState() => State;
+    
+    public IReadOnlyList<Move> GetCandidateMoves(GameState gameState, Square fromSqr, int pieceId)
+    {
+        var piece = State.PieceAt(fromSqr);
+
+        if (piece?.Id != pieceId)
+            return [];
+        
+        return piece.GetCandidateMoves(gameState, fromSqr);
+    }
+    
     public MoveResult PlayHumanMove(Side side, Move move)
     {
         EnsureOngoing();

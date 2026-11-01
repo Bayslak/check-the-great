@@ -57,6 +57,7 @@ public class Level
             var startingPositionJson = $"{kvp.Key.X + 1},{kvp.Key.Y + 1}";
             var pieceInitialization = new PieceInitialization()
             {
+                Id = kvp.Value.Id.ToString(),
                 PieceTypeJson = kvp.Value.GetPieceType().ToString(),
                 StartingPositionJson = startingPositionJson
             };

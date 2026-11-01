@@ -1,7 +1,9 @@
 using System;
-using System.IO;
-using System.Linq;
+using CheckTheGreat.AI.Evaluation;
+using CheckTheGreat.AI.Search;
 using CheckTheGreat.Application.Matches;
+using CheckTheGreat.Domain.Matches;
+using CheckTheGreat.Domain.Rules;
 using Godot;
 
 namespace CheckTheGreat.Godot.scripts;
@@ -10,6 +12,7 @@ public partial class GameManager : Node
 {
     [Export] private BoardManager _boardManager;
     [Export] private PieceManager _pieceManager;
+    [Export] private TurnManager _turnManager;
 
     public Action<GameState> GameStateChanged;
     public GameState CurrentGameState;
@@ -17,6 +20,9 @@ public partial class GameManager : Node
     [Export] private PlayerPiecePlacer _playerPiecePlacer;
 
     private Level _currentLevel;
+
+    public MatchController Match;
+    public MatchSettings MatchSettings;
     
     public override void _Ready()
     {
@@ -49,11 +55,16 @@ public partial class GameManager : Node
                 //_boardManager.HighlightStartingTiles(_currentLevel.StartingTiles);
                 break;
             case GameState.Level:
-                //TODO: implement turn system
+                _turnManager.Enable(this, _boardManager, _pieceManager);
                 break;
         }
         
         GD.Print("Entered state: " + enteredState);
+    }
+
+    private void HandlePiecesInitialized()
+    {
+        ChangeGameState(GameState.Level);
     }
 
     private void ExitState(GameState exitedState)
@@ -61,10 +72,11 @@ public partial class GameManager : Node
         switch (exitedState)
         {
             case GameState.PiecesPlacement:
-                _boardManager.DeHighlightTiles();
+                //_boardManager.DeHighlightTiles();
+                //_playerPiecePlacer.Disable();
                 break;
             case GameState.Level:
-                //TODO: clean up level
+                _turnManager.Disable();
                 break;
         }
     }
@@ -74,16 +86,42 @@ public partial class GameManager : Node
         var gameState = InitialPositionFactory.CreateStandard();
         var gameLevel = Level.LoadFromGameState(gameState);
         
+        MatchSettings = new MatchSettings(
+            WhiteController: ControllerType.Human,
+            BlackController: ControllerType.Cpu);
+        
+        var rules = new GameRules();
+        
+        Match = new MatchController(
+            gameState,
+            rules,
+            MatchSettings,
+            whiteAi: new MinimaxAi(rules, new Evaluator()),
+            blackAi: new MinimaxAi(rules, new Evaluator()));
+        
         //string levelJson = File.ReadAllText("resources/level_test.json");
         //var level = Level.LoadFromJson(levelJson);
         _currentLevel = gameLevel;
         
         _boardManager.InitializeBoard(_currentLevel);
         //_pieceManager.InitializePieces(level);
+        
+        _pieceManager.PiecesInitialized += HandlePiecesInitialized;
     }
 
     public void PlayerPiecePlacerDisabled()
     {
         ChangeGameState(GameState.Level);
+    }
+
+    public void UseMoveResult(MoveResult moveResult)
+    {
+        var fromPosition = new CellPosition(moveResult.Move.From.X + 1, moveResult.Move.From.Y + 1);
+        var toPosition =  new CellPosition(moveResult.Move.To.X + 1, moveResult.Move.To.Y + 1);
+
+        var pieceMoving = _pieceManager.Pieces[fromPosition];
+        _pieceManager.MovePiece(pieceMoving, fromPosition, toPosition);
+
+        _turnManager.AdvanceTurn();
     }
 }

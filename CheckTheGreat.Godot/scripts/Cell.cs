@@ -86,4 +86,12 @@ public partial class Cell : Node2D
         _startingTileSprite.Visible = value;
         IsStartingTile = value;
     }
+
+    public void SetAsPossibleMove(bool value)
+    {
+        _startingTileSprite ??= GetNode<Sprite2D>("starting_tile_sprite");
+        
+        _startingTileSprite.Visible = value;
+        IsHighlighted = value;
+    }
 }
