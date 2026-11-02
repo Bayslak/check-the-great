@@ -142,7 +142,11 @@ public partial class PieceManager : Node
         }
         
         Pieces.Remove(fromPosition);
-        pieceMoving.GlobalPosition = cellToMoveTo.GlobalPosition;
+        
+        var tween = GetTree().CreateTween();
+        tween.TweenProperty(pieceMoving, "position", cellToMoveTo.GlobalPosition, 0.2f);
+        
+        //pieceMoving.GlobalPosition = cellToMoveTo.GlobalPosition;
         Pieces.Add(toPosition, pieceMoving);
     }
 }

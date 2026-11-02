@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using CheckTheGreat.AI.Search;
 using CheckTheGreat.Domain.Board;
@@ -125,6 +126,9 @@ public partial class TurnManager : Node2D
 
     private async void PlayCpuTurn()
     {
+        double randomSeconds = GD.RandRange(0.2f, 0.8f);
+        await ToSignal(GetTree().CreateTimer(randomSeconds), SceneTreeTimer.SignalName.Timeout); // magic shit to learn
+        
         var moveResult = await _gameManager.Match.PlayCpuMoveAsync(new SearchOptions(MaxDepth: 3));
         _gameManager.UseMoveResult(moveResult);
     }
